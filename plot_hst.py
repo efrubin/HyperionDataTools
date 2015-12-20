@@ -38,8 +38,9 @@ FGRAVZ = 14 + Eoff
 #fEdd_star = 0.02 
 #tau_star  = 10.0
 #Lx        = 64.0
-fEdd_star = 1.00 
-tau_star  = 3.0
+# fEdd_star = 1.00 
+# tau_star  = 3.0
+
 
 # Problem constants
 g         = 1.0
@@ -74,7 +75,8 @@ plt.figure()
 plt.plot(t,M)
 plt.xlabel(r'$t$')
 plt.ylabel(r'$M$')
-plt.ylim(0,600)
+plt.title(r'$\epsilon = {}$, $\kappa = {} $, $\Sigma = {}$'.format(eps, kap, sig))
+plt.ylim(0,100)
 plt.savefig('isoSelfG_'+run+'_mass.png')
 plt.savefig('isoSelfG_{:s}_mass.eps'.format(run))
 
@@ -86,6 +88,7 @@ if RADIATION:
     #plt.plot(t,fEdd,t,np.ones(t.shape),'r--')
     plt.xlabel(r'$t/t_*$')
     plt.ylabel(r'$\langle f_\mathrm{Edd} \rangle$')
+    plt.title(r'$\epsilon = {}$, $\kappa = {} $, $\Sigma = {}$'.format(eps, kap, sig))
     ax2 = ax1.twinx()  # Create a separate axis on right for ftrap
     ax2.set_ylabel(r'$f_\mathrm{trap}$')
     a,b = ax1.get_ylim()
