@@ -5,7 +5,7 @@ from runinfo import *
 RADIATION  = True
 ISOTHERMAL = True
 
-filename = '/Users/eliasrubin/data/hyperion/isoSelfG/withRadSmallTurb001/isoSelfG.hst'
+filename = '/Users/eliasrubin/data/hyperion/isoSelfG/e03k30s100-r256-1/id0/isoSelfG.hst'
 
 # History file columns
 if ISOTHERMAL:
@@ -19,11 +19,14 @@ MOMZ   = 4 + Eoff
 KINX   = 6 + Eoff
 KINZ   = 7 + Eoff
 EGRAV  = 9 + Eoff
-JSRC   = 10 + Eoff
-ER     = 11 + Eoff
-FOUT   = 12 + Eoff
-FRADZ  = 13 + Eoff
-FGRAVZ = 14 + Eoff
+FX     = 11 + Eoff
+FY     = 12 + Eoff
+FZ     = 13 + Eoff
+JSRC   = 14 + Eoff
+INTER  = 15 + Eoff
+FOUT   = 16 + Eoff
+FRADZ  = 17 + Eoff
+FGRAVZ = 18 + Eoff
 # FX     = 10 + Eoff
 # FY     = 11 + Eoff
 # FZ     = 12 + Eoff
@@ -35,10 +38,10 @@ FGRAVZ = 14 + Eoff
 # FZC    = 18 + Eoff
 
 # Problem parameters
-#fEdd_star = 0.02 
+#fEdd_star = 0.02
 #tau_star  = 10.0
 #Lx        = 64.0
-# fEdd_star = 1.00 
+# fEdd_star = 1.00
 # tau_star  = 3.0
 
 
@@ -49,10 +52,11 @@ Sigma     = 1.0
 
 with open(filename,'r') as f:
     data = np.loadtxt(f)
-    
+
 t = data[:,TIME]
 M = data[:,MASS]
 fgravz = data[:,FGRAVZ]
+print fgravz
 if RADIATION:
     fradz  = data[:,FRADZ]
     #tauz_V = data[:,TAUZ]
@@ -82,24 +86,25 @@ plt.savefig('isoSelfG_{:s}_mass.eps'.format(run))
 
 if RADIATION:
     # Plot <f_Edd> and f_trap
+    fEddGuess = 0.08 * kap * eps
     plt.figure()
     fig1, ax1 = plt.subplots()
-    plt.semilogy(t,fEdd,t,0.02*np.ones(t.shape),'r--')
-    #plt.plot(t,fEdd,t,np.ones(t.shape),'r--')
+    #plt.semilogy(t,fEdd,t,fEddGuess*np.ones(t.shape),'r--')
+    plt.plot(t,fEdd,t,fEddGuess*np.ones(t.shape),'r--')
     plt.xlabel(r'$t/t_*$')
     plt.ylabel(r'$\langle f_\mathrm{Edd} \rangle$')
     plt.title(r'$\epsilon = {}$, $\kappa = {} $, $\Sigma = {}$'.format(eps, kap, sig))
-    ax2 = ax1.twinx()  # Create a separate axis on right for ftrap
-    ax2.set_ylabel(r'$f_\mathrm{trap}$')
-    a,b = ax1.get_ylim()
-    #print a,b
-    a *= tau_star/fEdd_star
-    b *= tau_star/fEdd_star
-    #print a,b
-    ax2.set_ylim(a,b)
+    # ax2 = ax1.twinx()  # Create a separate axis on right for ftrap
+    # ax2.set_ylabel(r'$f_\mathrm{trap}$')
+    # a,b = ax1.get_ylim()
+    # #print a,b
+    # a *= tau_star/fEdd_star
+    # b *= tau_star/fEdd_star
+    # #print a,b
+    # ax2.set_ylim(a,b)
     #ax2.set_yscale('log')
     ax1.set_ylim(0,2)
-    plt.savefig('isoSelfG_{:s}_fEdd.eps'.format(run))
+    plt.savefig('isoSelfG_{:s}_fEdd.png'.format(run))
 
     # # Plot tau_z history
     # plt.figure()
@@ -108,7 +113,7 @@ if RADIATION:
     # plt.ylabel(r'$\tau_V$')
     # plt.ylim(0,15)
     # plt.savefig('radplanesrc_kt12_{:s}_tauz.eps'.format(run))
-    
+
     # # Plot tauz_F/tauz_V history (flux-density correlation)
     # plt.figure()
     # plt.plot(t,tauz_F/tauz_V)
@@ -116,7 +121,7 @@ if RADIATION:
     # plt.ylabel(r'$\tau_F/\tau_V$')
     # plt.ylim(0,1)
     # plt.savefig('radplanesrc_kt12_{:s}_tauz_FV.eps'.format(run))
-    
+
 
 # # Plot \sigma
 # fig2 = plt.figure()
@@ -140,7 +145,7 @@ plt.savefig('isoSelfG_{:s}_vz.eps'.format(run))
 
 #with open(filename2,'r') as f:
 #    data = np.loadtxt(f)
-#    
+#
 #t = data[:,TIME]
 #M = data[:,MASS]
 #fgrav = g*M/128.0
