@@ -11,7 +11,7 @@ filename = '../data/id0/isoSelfG.hst'
 outFile = glob.glob('../*.out')[0] # look in the .out file for this run
 with open(outFile) as o:
     data = o.readlines()
-outFile.close()
+o.close()
 
 pattern = re.compile('units.g')
 for line in data:
