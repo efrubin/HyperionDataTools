@@ -67,7 +67,7 @@ with open(filename,'r') as f:
 
 t = data[:,TIME]
 M = data[:,MASS]
-M /= runGrams
+M /= runGrams / 2e33
 fgravz = data[:,FGRAVZ]
 print fgravz
 if RADIATION:
@@ -91,7 +91,7 @@ sigma = np.sqrt(sigmax**2 + sigmaz**2)/cstar
 plt.figure()
 plt.plot(t,M)
 plt.xlabel(r'$t$')
-plt.ylabel(r'$M$')
+plt.ylabel(r'$M / M_{\odot}$')
 plt.title(r'$\epsilon = {}$, $\kappa = {} $, $\Sigma = {}$'.format(eps, kap, sig))
 plt.ylim(0,100)
 plt.savefig('isoSelfG_'+run+'_mass.png')
