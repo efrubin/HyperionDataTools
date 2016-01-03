@@ -1,11 +1,23 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import re
+import glob
 from runinfo import *
 
 RADIATION  = True
 ISOTHERMAL = True
 
 filename = '/Users/eliasrubin/data/hyperion/isoSelfG/e03k30s100-r256-1/id0/isoSelfG.hst'
+outFile = glob.glob('../*.out')[0] # look in the .out file for this run
+with open(outFile):
+    data = outFile.readlines()
+outFile.close()
+
+pattern = re.compile('units.g')
+for line in data:
+    if re.match(pattern, line):
+        a = line.split()
+        runGrams = float(a[2]) #obtain grams unit to scale mass history
 
 # History file columns
 if ISOTHERMAL:
@@ -55,6 +67,7 @@ with open(filename,'r') as f:
 
 t = data[:,TIME]
 M = data[:,MASS]
+M /= runGrams
 fgravz = data[:,FGRAVZ]
 print fgravz
 if RADIATION:
@@ -135,12 +148,12 @@ if RADIATION:
 # plt.legend(loc='best')
 # plt.savefig('radplanesrc_kt12_{:s}_sigma.eps'.format(run))
 
-# Plot <v_z>
-fig3 = plt.figure()
-plt.plot(t,vz,t,np.zeros(vz.shape),'r--')
-plt.xlabel(r'$t/t_*$')
-plt.ylabel(r'$\langle v_z \rangle/c_\mathrm{s,*}$')
-plt.savefig('isoSelfG_{:s}_vz.eps'.format(run))
+# # Plot <v_z>
+# fig3 = plt.figure()
+# plt.plot(t,vz,t,np.zeros(vz.shape),'r--')
+# plt.xlabel(r'$t/t_*$')
+# plt.ylabel(r'$\langle v_z \rangle/c_\mathrm{s,*}$')
+# plt.savefig('isoSelfG_{:s}_vz.eps'.format(run))
 
 
 #with open(filename2,'r') as f:
