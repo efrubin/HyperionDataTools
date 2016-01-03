@@ -7,7 +7,7 @@ from runinfo import *
 RADIATION  = True
 ISOTHERMAL = True
 
-filename = '/Users/eliasrubin/data/hyperion/isoSelfG/e03k30s100-r256-1/id0/isoSelfG.hst'
+filename = '../data/id0/isoSelfG.hst'
 outFile = glob.glob('../*.out')[0] # look in the .out file for this run
 with open(outFile):
     data = outFile.readlines()
