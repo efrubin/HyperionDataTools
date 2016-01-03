@@ -17,6 +17,16 @@ DeleteAllPlots()
 for name in GetAnnotationObjectNames():
     DeleteAnnotationObject(name)
 
+# Set save attributes
+s = SaveWindowAttributes()
+s.format = s.PPM
+s.width, s.height = width, height
+s.fileName = "isoSelfG_" + run + "_density_"
+s.outputToCurrentDirectory = 0
+s.outputDirectory = "./frames/"
+SetSaveWindowAttributes(s)
+
+
 # Create plots
 # Create plot 1
 OpenDatabase("../data/isoSelfG_joined.*.vtk database")
