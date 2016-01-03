@@ -29,7 +29,8 @@ SetSaveWindowAttributes(s)
 
 # Create plots
 # Create plot 1
-OpenDatabase("../data/isoSelfG_joined.*.vtk database")
+db = "..data/isoSelfG_joined.*.vtk database"
+OpenDatabase(db)
 AddPlot("Pseudocolor", "density", 0, 0)
 atts = PseudocolorAttributes()
 atts.colorTableName = "orangehot"
