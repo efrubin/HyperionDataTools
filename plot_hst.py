@@ -18,7 +18,7 @@ for line in data:
     if re.match(pattern, line):
         a = line.split()
         runGrams = float(a[2]) #obtain grams unit to scale mass history
-print "units.g: " + runGrams
+print runGrams
 # History file columns
 if ISOTHERMAL:
     Eoff = 0
