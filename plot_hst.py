@@ -68,7 +68,7 @@ with open(filename,'r') as f:
 t = data[:,TIME]
 M = data[:,MASS]
 M /= runGrams
-M / 2e33
+M /= 2e33
 fgravz = data[:,FGRAVZ]
 print M
 if RADIATION:
