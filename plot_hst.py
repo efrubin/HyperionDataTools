@@ -91,7 +91,7 @@ sigma = np.sqrt(sigmax**2 + sigmaz**2)/cstar
 # Plot mass history
 plt.figure()
 plt.plot(t,M)
-plt.xlabel(r'$t$')
+plt.xlabel(r'$t/t_{\mathrm{ff}}$')
 plt.ylabel(r'$M / M_{\odot}$')
 plt.ylim(0, 100)
 plt.title(r'$\epsilon = {}$, $\kappa = {} $, $\Sigma = {}$'.format(eps, kap, sig))
@@ -105,7 +105,7 @@ if RADIATION:
     fig1, ax1 = plt.subplots()
     #plt.semilogy(t,fEdd,t,fEddGuess*np.ones(t.shape),'r--')
     plt.plot(t,fEdd,t,fEddGuess*np.ones(t.shape),'r--')
-    plt.xlabel(r'$t/t_*$')
+    plt.xlabel(r'$t/t_{\mathrm{ff}}$')
     plt.ylabel(r'$\langle f_\mathrm{Edd} \rangle$')
     plt.title(r'$\epsilon = {}$, $\kappa = {} $, $\Sigma = {}$'.format(eps, kap, sig))
     # ax2 = ax1.twinx()  # Create a separate axis on right for ftrap
