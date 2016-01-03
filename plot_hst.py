@@ -18,7 +18,7 @@ for line in data:
     if re.match(pattern, line):
         a = line.split()
         runGrams = float(a[2]) #obtain grams unit to scale mass history
-
+print "units.g: " + runGrams
 # History file columns
 if ISOTHERMAL:
     Eoff = 0
@@ -69,7 +69,7 @@ t = data[:,TIME]
 M = data[:,MASS]
 M /= runGrams / 2e33
 fgravz = data[:,FGRAVZ]
-print fgravz
+print M
 if RADIATION:
     fradz  = data[:,FRADZ]
     #tauz_V = data[:,TAUZ]
@@ -93,7 +93,6 @@ plt.plot(t,M)
 plt.xlabel(r'$t$')
 plt.ylabel(r'$M / M_{\odot}$')
 plt.title(r'$\epsilon = {}$, $\kappa = {} $, $\Sigma = {}$'.format(eps, kap, sig))
-plt.ylim(0,100)
 plt.savefig('isoSelfG_'+run+'_mass.png')
 plt.savefig('isoSelfG_{:s}_mass.eps'.format(run))
 
