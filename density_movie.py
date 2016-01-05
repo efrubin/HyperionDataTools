@@ -50,9 +50,9 @@ DrawPlots()
 
 # Set the view
 view = View2DAttributes()
-view.windowCoords = (-32, 32, -256, 256)
+view.windowCoords = (-2.5, 2.5, -25, 25)
 view.viewportCoords = (0.4, 0.95, 0.15, 0.9)
-view.fullFrameActivationMode = view.Auto  # On, Off, Auto
+view.fullFrameActivationMode = view.On  # On, Off, Auto
 view.fullFrameAutoThreshold = 100
 view.xScale = view.LINEAR  # LINEAR, LOG
 view.yScale = view.LINEAR  # LINEAR, LOG
