@@ -2,7 +2,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-
+ISOTHERMAL = 1
 #Problem parameters
 c_s = 1.0
 
@@ -67,8 +67,8 @@ def mach_number(filename):
         M = hst[:,MASS]
         vx = hst[:,MOMX]/M
         vz = hst[:,MOMZ]/M
-        Ekinx = hst[:,EKINX]
-        Ekinz = hst[:,EKINZ]
+        Ekinx = hst[:,KINX]
+        Ekinz = hst[:,KINZ]
         sigmax = np.sqrt(2.0*Ekinx/M - vx**2)
         sigmaz = np.sqrt(2.0*Ekinz/M - vz**2)
         Mach = np.sqrt(sigmax**2 + sigmaz**2)/c_s
@@ -130,7 +130,7 @@ with plt.style.context("bmh"):
     plt.title(r"Turbulent Velocity Distribution",size=18)
     plt.xlabel(r'$t/t_\mathrm{ff}$',size=18)
     plt.ylabel(r'$\mathrm{Mach}$ $\mathrm{Number}$',size=18)
-    plt.axis([0,250,0,3])
+    plt.axis([0,250,0,1])
     plt.legend(loc='upper right', shadow=True, prop={'size':12})
 #plt.show()
 plt.savefig('Vdist.png')
@@ -144,7 +144,7 @@ with plt.style.context("bmh"):
     plt.title("Effective Eddington Factor",size=18)
     plt.xlabel(r'$t/t_\mathrm{ff}$',size=18)
     plt.ylabel(r'$\langle f_\mathrm{Edd,eff} \rangle$',size=18)
-    plt.axis([0,250,0,.8])
+    plt.axis([0,250,0,1])
     plt.legend(loc='upper right', shadow=True, prop={'size':12})
 
 plt.savefig('fedd.png')
@@ -160,6 +160,6 @@ with plt.style.context("bmh"):
     plt.title("Mass history",size=18)
     plt.xlabel(r'$t/t_\mathrm{ff}$',size=18)
     plt.ylabel(r'$\frac{M}{M_{\odot}}$',size=18)
-    plt.axis([0,250,0,40])
+    plt.axis([0,250,0,1])
     plt.legend(loc='upper right', shadow=True, prop={'size':12})
 plt.savefig('mass.png')
