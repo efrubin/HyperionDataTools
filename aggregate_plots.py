@@ -120,7 +120,7 @@ def mass(filename):
         mass = hst[:,MASS] / 5.875e-34 / 2e30
     return mass
 
-
+plt.figure()
 with plt.style.context("bmh"):
     for i in range(len(filenames)):
         t    = times(filenames[i])
@@ -135,6 +135,7 @@ with plt.style.context("bmh"):
 #plt.show()
 plt.savefig('Vdist.png')
 
+plt.figure()
 with plt.style.context("bmh"):
     for i in range(len(filenames)):
         t    = times(filenames[i])
@@ -150,16 +151,16 @@ with plt.style.context("bmh"):
 plt.savefig('fedd.png')
 #plt.show()
 
+plt.figure()
+with plt.style.context("bmh"):
+    for i in range(len(filenames)):
+        t    = times(filenames[i])
+        mej = mass(filenames[i])
+        plt.plot(t,mej,label=labels[i])
 
-#with plt.style.context("bmh"):
-for i in range(len(filenames)):
-    t    = times(filenames[i])
-    mej = mass(filenames[i])
-    plt.plot(t,mej,label=labels[i])
-
-plt.title("Mass history",size=18)
-plt.xlabel(r'$t/t_\mathrm{ff}$',size=18)
-plt.ylabel(r'$\frac{M}{M_{\odot}}$',size=18)
-plt.axis([0,250,0,1])
-plt.legend(loc='upper right', shadow=True, prop={'size':12})
+    plt.title("Mass history",size=18)
+    plt.xlabel(r'$t/t_\mathrm{ff}$',size=18)
+    plt.ylabel(r'$\frac{M}{M_{\odot}}$',size=18)
+    plt.axis([0,250,0,1])
+    plt.legend(loc='upper right', shadow=True, prop={'size':12})
 plt.savefig('mass.png')
